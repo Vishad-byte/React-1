@@ -10,7 +10,7 @@ function App() {
   const [convertedAmount, setConvertedAmount] = useState(0)
 
   const currencyInfo = useCurrencyInfo(from)
-  const options = Object.keys(currencyInfo)
+  const options = Object.keys(currencyInfo)   /*to get the currency options from our api response*/
 
   const swap = () => {
     setFrom(to),
@@ -21,7 +21,7 @@ function App() {
 
   const convert = () => {
     setConvertedAmount(amount * currencyInfo[to])
-  }
+  }     /*we will get exchange rates which will multiply with the from amount to get the converted amt for eg- 2 usd = 2 x 86 inr*/
 
   return (
         <div
@@ -44,7 +44,7 @@ function App() {
                                 amount = {amount}
                                 currencyOptions={options}
                                 onCurrencyChange={(currency) => 
-                                  setAmount(amount)
+                                  setAmount(amount)     /*event hone wale props expect a function in parameter*/
                                 }
                                 selectCurrency={from}
                                 onAmountChange={(amount) => setAmount(amount)}

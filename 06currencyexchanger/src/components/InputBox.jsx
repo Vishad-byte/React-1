@@ -1,7 +1,7 @@
 import React,{useId} from 'react'
 
 function InputBox({
-    label,
+    label,                       /*all these are props which are used first here in the html code written below and then its values are passes in app.jsx file*/
     amount,
     onAmountChange,
     onCurrencyChange,
@@ -40,9 +40,9 @@ function InputBox({
                     
                 >
                     
-                        {currencyOptions.map((currency) => (
-                            <option key={currency} value={currency}>
-                            {currency}
+                            {currencyOptions.map((currency) => (
+                                <option key={currency} value={currency}>
+                                {currency}
                             </option>
                         ))}
                 
