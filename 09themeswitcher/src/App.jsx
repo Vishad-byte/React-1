@@ -7,10 +7,10 @@ import Card from './components/Card'
 function App() {
   const [themeMode, setThemeMode] = useState("light")
 
-  const lightTheme = () => {
+  const lightTheme = () => {            //if we define a method with the exact same name as given in the value(data) passed in the context then its functionality will be created
     setThemeMode("light")
   }
-  const darkTheme = () => {
+  const darkTheme = () => {       
     setThemeMode("dark")
   }
 

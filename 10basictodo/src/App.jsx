@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
-import { TodoProvider } from './context/todocontext'
+import { TodoProvider } from './context/TodoContext'
+import { TodoForm } from './components/index'
+import { TodoItem } from './components/index'
 
 function App() {
 
@@ -22,6 +24,19 @@ function App() {
     setTodos((prev) => prev.map((prevTodo) => prevTodo.id === id? {...prevTodo, completed: !prevTodo.completed}: prevTodo) )
   }    //receive array of todos in which we will loop through and them and match that todo object whose id matches with the given id.Then we received all the values inside the object of the matching todo using ... and then overwrote the value of completed
 
+  useEffect(() => {
+   const todos = JSON.parse(localStorage.getItem("todos"))   // when we get the item from the local storage we get it in form of string but we need to parse in json to preserve the structure i.e the objects and arrays
+
+   if(todos && todos.length > 0){
+    setTodos(todos)
+   }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos])         //set the items in the string format
+  
+
 
 
   return (
@@ -31,9 +46,16 @@ function App() {
           <h1 className="text-2xl font-bold text-center mb-8 mt-2">Manage Your Todos</h1>
           <div className="mb-4">
             {/* Todo form goes here */} 
+            <TodoForm />
           </div>
           <div className="flex flex-wrap gap-y-3">
             {/*Loop and Add TodoItem here */}
+            {todos.map((todo) => (
+                          <div key={todo.id}
+                          className='w-full'>
+                            <TodoItem todo={todo} />
+                          </div>
+                        ))}
           </div>
         </div>
       </div>
